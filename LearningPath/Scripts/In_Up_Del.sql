@@ -33,7 +33,7 @@ values (default,
         81,
         9.42);
    
---  Inserting in multiple tables
+--  Inserting in multiple tables in a hirarchical relationship Parent - Child
 insert into orders (customer_id, order_date, status)
 values (1, '2021-03-31', 1);
 
@@ -66,5 +66,29 @@ SET
 	payment_total = 10, 
     payment_date = '2019-06-04'
 WHERE invoice_id = 1;
+
+
+UPDATE customers
+SET	
+	points = points + 50
+WHERE birth_date < '1990-01-01';
+
+SELECT * 
+FROM customers
+WHERE birth_date < '1990-01-01';
+
+UPDATE orders
+SET
+	comments = 'Gold'
+WHERE customer_id IN
+				(SELECT customer_id 
+                FROM customers
+                WHERE points > 3000);
+                
+select * from orders;
+
+
+
+
 
     
