@@ -122,7 +122,8 @@ SELECT
         t.topping_name
 FROM pizza p
 RIGHT JOIN toppings t
-USING (pizza_id);
+USING (pizza_id)
+order by name;
 
 
 SELECT 
