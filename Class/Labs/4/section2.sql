@@ -95,7 +95,7 @@ SET  content = 'Checked in at Germany'
 WHERE post_id = 11;
 
 
-
+SELECT * FROM post_content_history;
 
 
 
