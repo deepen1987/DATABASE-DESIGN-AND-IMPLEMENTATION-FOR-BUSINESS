@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`orders` (
   `order_date` DATETIME NOT NULL,
   `status` INT NOT NULL,
   `shipping_date` DATETIME NOT NULL,
-  `shipping_id` INT NOT NULL,
+  `shipping_id` INT NULL,
   PRIMARY KEY (`order_id`),
   INDEX `fk_orders_customers1_idx` (`customer_id` ASC) VISIBLE,
   INDEX `fk_orders_shipping1_idx` (`shipping_id` ASC) VISIBLE,
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`billing` (
   `bill_id` INT NOT NULL AUTO_INCREMENT,
   `customer_id` INT NOT NULL,
   `order_id` INT NOT NULL,
-  `discount_id` INT NOT NULL,
+  `discount_id` INT NULL,
   `total_bill` DECIMAL(6,2) NOT NULL,
   `payment_method` VARCHAR(45) NOT NULL,
   `payment_total` DECIMAL(6,2) NOT NULL,
@@ -218,6 +218,22 @@ CREATE TABLE IF NOT EXISTS `ecommerce`.`billing` (
     REFERENCES `ecommerce`.`discounts` (`discount_id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ecommerce`.`member_history`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ecommerce`.`member_history` (
+  `customer_id` INT NOT NULL,
+  `old_status` VARCHAR(45) NOT NULL,
+  `new_status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`customer_id`),
+  CONSTRAINT `fk_customer_id`
+    FOREIGN KEY (`customer_id`)
+    REFERENCES `ecommerce`.`customers` (`customer_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
